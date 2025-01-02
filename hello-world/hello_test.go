@@ -13,14 +13,28 @@ Rules for tests:
 func TestHello(t *testing.T) {
 	// t.Run is called a subtest
 	t.Run("saying hello to people", func(t *testing.T) {
-		got := Hello("Soup")
+		got := Hello("Soup", "")
 		want := "Hello, Soup"
 
 		assertCorrectMessage(t, got, want)
 	})
 	t.Run("say 'Hello, World' when an empty string is supplied", func(t *testing.T) {
-		got := Hello("")
+		got := Hello("", "")
 		want := "Hello, World"
+
+		assertCorrectMessage(t, got, want)
+	})
+
+	t.Run("in French", func(t *testing.T) {
+		got := Hello("Soup", "FR")
+		want := "Bonjour, Soup"
+
+		assertCorrectMessage(t, got, want)
+	})
+
+	t.Run("in Spanish", func(t *testing.T) {
+		got := Hello("Soup", "ES")
+		want := "Hola, Soup"
 
 		assertCorrectMessage(t, got, want)
 	})
