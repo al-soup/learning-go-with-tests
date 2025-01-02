@@ -13,6 +13,7 @@ Rules for tests:
 func TestHello(t *testing.T) {
 	// t.Run is called a subtest
 	t.Run("saying hello to people", func(t *testing.T) {
+		// The := syntax is shorthand for declaring and initializing a variable, e.g. for `var got string = ...` in this case. This syntax is only available inside functions.
 		got := Hello("Soup", "")
 		want := "Hello, Soup"
 
