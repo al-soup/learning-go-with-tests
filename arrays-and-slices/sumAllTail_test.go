@@ -16,13 +16,13 @@ func TestSumAllTails(t *testing.T) {
 		}
 	})
 
-	// t.Run("should accecpt empyt slices", func(t *testing.T) {
-	// 	got := SumAllTails([]int{}, []int{1, 2, 3})
-	// 	want := []int{0, 7}
+	t.Run("should accecpt empyt slices", func(t *testing.T) {
+		got := SumAllTail([]int{}, []int{1, 2, 3})
+		want := []int{0, 5}
 
-	// 	if !reflect.DeepEqual(got, want) {
-	// 		t.Errorf("got %v want %v", got, want)
-	// 	}
+		if !reflect.DeepEqual(got, want) {
+			t.Errorf("got %v want %v", got, want)
+		}
 
-	// })
+	})
 }
