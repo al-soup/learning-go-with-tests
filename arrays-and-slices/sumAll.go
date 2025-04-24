@@ -1,14 +1,20 @@
 package main
 
-// variadic functions can take a variable number of arguments.
-func SumAll(numbersToSum ...[]int) (sums []int) {
-	listCount := len(numbersToSum)
-	// make allows you to create a slice with a starting capacity of the len of the listCount
-	// make([]int, 0, 5) creates a slice with length 0 and capacity 5
-	sums = make([]int, listCount)
+// vardic funcitons can take a variable number of arguments
+func SumAll(numberToSum ...[]int) []int {
+	// Alternative version with the problem that we might get an error if we insert to
+	// to a non-existing position. With the other version we need to worry less about capacity
 
-	for i, numbers := range numbersToSum {
-		sums[i] = Sum(numbers)
+	// numberCount := len(numberToSum)
+	// sums := make([]int, numberCount)
+	// for index, numbers := range numberToSum {
+	// 	sums[index] = Sum(numbers)
+	// }
+
+	var sums []int
+	for _, numbers := range numberToSum {
+		sums = append(sums, Sum(numbers))
 	}
-	return
+
+	return sums
 }
