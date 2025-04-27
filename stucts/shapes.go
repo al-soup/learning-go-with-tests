@@ -7,6 +7,10 @@ type Rectangle struct {
 	Height float64
 }
 
+type Shape interface {
+	Area() float64
+}
+
 // A method is a function with a receiver (it's associated with a specific type)
 // Method declarations bind a name to a method and associate it with the receiver's base type
 // Unlike regular functions which can be called independently (e.g., Area(rectangle))
