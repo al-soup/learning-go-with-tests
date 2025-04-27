@@ -7,6 +7,7 @@ type Rectangle struct {
 	Height float64
 }
 
+// In Go interface resolution is implicit. If the type you pass in matches what the interface is asking for, it will compile.
 type Shape interface {
 	Area() float64
 }
