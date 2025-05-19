@@ -1,8 +1,6 @@
 package main
 
-import (
-	"testing"
-)
+import "testing"
 
 func TestWallet(t *testing.T) {
 
@@ -16,11 +14,18 @@ func TestWallet(t *testing.T) {
 		}
 	}
 
-	assertError := func(t testing.TB, err error) {
+	assertError := func(t testing.TB, got error, want string) {
 		t.Helper()
 
-		if err == nil {
-			t.Errorf("did not receive expected errror")
+		if got == nil {
+			// stops execution here
+			t.Fatal("did not receive expected errror")
+		}
+
+		// `got.Error()` converts Error to a string
+		// It makes sense to check against nil first (above)
+		if got.Error() != want {
+			t.Errorf("got %q, want %q", got, want)
 		}
 	}
 
@@ -28,7 +33,6 @@ func TestWallet(t *testing.T) {
 		wallet := Wallet{}
 		wallet.Deposit(BitCoin(10))
 		assertBalance(t, wallet, BitCoin(10))
-
 	})
 
 	t.Run("withdraw", func(t *testing.T) {
@@ -42,7 +46,7 @@ func TestWallet(t *testing.T) {
 		wallet := Wallet{startingFund}
 		err := wallet.Withdraw(BitCoin(15))
 
-		assertError(t, err)
+		assertError(t, err, "Insufficient funds")
 		assertBalance(t, wallet, startingFund)
 	})
 
