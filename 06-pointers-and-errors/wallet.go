@@ -21,6 +21,9 @@ type Wallet struct {
 	balance BitCoin
 }
 
+// use var to define values global for a package
+var ErrInsufficientFunds = errors.New("cannot withdraw, insufficient funds")
+
 // In Go, value receivers `(func (w Wallet))` create a copy of the struct, so modifications
 // are lost after the method returns. Pointer receivers `(func (w *Wallet))` operate on the
 // original struct, allowing permanent modifications. Use value receivers for immutability
@@ -40,7 +43,7 @@ func (w *Wallet) Deposit(amount BitCoin) {
 func (w *Wallet) Withdraw(amount BitCoin) error {
 
 	if amount > w.balance {
-		return errors.New("Insufficient funds")
+		return ErrInsufficientFunds
 	}
 
 	w.balance -= amount
