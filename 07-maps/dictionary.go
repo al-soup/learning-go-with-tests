@@ -13,9 +13,9 @@ Structure definition:
 Type safety:
 - Structs provide type safety for each field
 - Maps have homogeneous value types (unless using interface{})
-
 */
+type Dictionary map[string]string
 
-func Search(dictionary map[string]string, word string) string {
-	return dictionary[word]
+func (d Dictionary) Search(word string) string {
+	return d[word]
 }
