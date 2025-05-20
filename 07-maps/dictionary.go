@@ -18,11 +18,13 @@ Type safety:
 */
 type Dictionary map[string]string
 
+var ErrEntryNotFound = errors.New("word not found")
+
 func (d Dictionary) Search(word string) (string, error) {
 	// map lookup returns a second arg as boolean which indicates if the key was found
 	entry, found := d[word]
 	if !found {
-		return "", errors.New("word not found")
+		return "", ErrEntryNotFound
 	}
 
 	return entry, nil
