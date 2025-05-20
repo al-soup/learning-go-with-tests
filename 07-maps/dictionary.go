@@ -18,7 +18,10 @@ Type safety:
 */
 type Dictionary map[string]string
 
-var ErrEntryNotFound = errors.New("word not found")
+var (
+	ErrEntryNotFound     = errors.New("word not found")
+	ErrWordAlreadyExists = errors.New("word does already exist")
+)
 
 func (d Dictionary) Search(word string) (string, error) {
 	// map lookup returns a second arg as boolean which indicates if the key was found
@@ -41,6 +44,18 @@ func (d Dictionary) Search(word string) (string, error) {
 	// OR
 	var dictionary = make(map[string]string)
 */
-func (d Dictionary) Add(key, value string) {
-	d[key] = value
+func (d Dictionary) Add(key, value string) error {
+	// In a map already existing values for a key are overwritten
+	_, err := d.Search(key)
+
+	switch err {
+	case ErrEntryNotFound:
+		d[key] = value
+	case nil:
+		return ErrWordAlreadyExists
+	default:
+		return err
+	}
+
+	return nil
 }
