@@ -1,5 +1,7 @@
 package main
 
+import "errors"
+
 /*
 Structs vs Maps
 
@@ -16,6 +18,12 @@ Type safety:
 */
 type Dictionary map[string]string
 
-func (d Dictionary) Search(word string) string {
-	return d[word]
+func (d Dictionary) Search(word string) (string, error) {
+	// map lookup returns a second arg as boolean which indicates if the key was found
+	entry, found := d[word]
+	if !found {
+		return "", errors.New("word not found")
+	}
+
+	return entry, nil
 }
