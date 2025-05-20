@@ -29,6 +29,7 @@ func TestWallet(t *testing.T) {
 
 // Move helpers outside of test body so you can start reading assertions right away
 func assertBalance(t testing.TB, wallet Wallet, want BitCoin) {
+	t.Helper()
 	got := wallet.Balance()
 
 	if got != want {
