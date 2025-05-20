@@ -29,3 +29,13 @@ func (d Dictionary) Search(word string) (string, error) {
 
 	return entry, nil
 }
+
+// Maps can be modified without passing as an address to it
+// They are not reference types although they feel like it.
+// When you pass a map to a func/mehtod you are copying it
+// but just the pointer part and not the underlaying data structure
+// So maps can be a nil value - therefor should never initialize it as such
+// Rather init an empty map or use `make`
+func (d Dictionary) Add(key, value string) {
+	d[key] = value
+}
