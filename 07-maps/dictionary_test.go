@@ -29,18 +29,25 @@ func TestSearch(t *testing.T) {
 
 	t.Run("add word", func(t *testing.T) {
 		dictionary := Dictionary{}
-		want := "new Value"
-		dictionary.Add("newKey", want)
+		key := "new key"
+		value := "new value"
+		dictionary.Add(key, value)
 
-		got, err := dictionary.Search("newKey")
-
-		if err != nil {
-			t.Fatal("should find added word: ", err)
-		}
-
-		assertStrings(t, got, want)
+		assertDefinition(t, dictionary, key, value)
 	})
 
+}
+
+func assertDefinition(t testing.TB, dictionary Dictionary, key, value string) {
+	t.Helper()
+
+	got, err := dictionary.Search(key)
+
+	if err != nil {
+		t.Fatal("expected to find value for key: ", key)
+	}
+
+	assertStrings(t, got, value)
 }
 
 func assertStrings(t testing.TB, got, want string) {

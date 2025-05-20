@@ -36,6 +36,11 @@ func (d Dictionary) Search(word string) (string, error) {
 // but just the pointer part and not the underlaying data structure
 // So maps can be a nil value - therefor should never initialize it as such
 // Rather init an empty map or use `make`
+/*
+	var dictionary = map[string]string{}
+	// OR
+	var dictionary = make(map[string]string)
+*/
 func (d Dictionary) Add(key, value string) {
 	d[key] = value
 }
