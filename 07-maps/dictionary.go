@@ -1,7 +1,5 @@
 package main
 
-import "errors"
-
 /*
 Structs vs Maps
 
@@ -18,10 +16,18 @@ Type safety:
 */
 type Dictionary map[string]string
 
-var (
-	ErrEntryNotFound     = errors.New("word not found")
-	ErrWordAlreadyExists = errors.New("word does already exist")
+const (
+	ErrEntryNotFound     = DictionaryErr("word not found")
+	ErrWordAlreadyExists = DictionaryErr("word does already exist")
+	ErrWordDoesNotExist  = DictionaryErr("word does not exist")
 )
+
+type DictionaryErr string
+
+// The Dictionary type implements the `error` interface
+func (e DictionaryErr) Error() string {
+	return string(e)
+}
 
 func (d Dictionary) Search(word string) (string, error) {
 	// map lookup returns a second arg as boolean which indicates if the key was found
@@ -53,6 +59,36 @@ func (d Dictionary) Add(key, value string) error {
 		d[key] = value
 	case nil:
 		return ErrWordAlreadyExists
+	default:
+		return err
+	}
+
+	return nil
+}
+
+func (d Dictionary) Update(key, value string) error {
+	_, err := d.Search(key)
+
+	switch err {
+	case ErrEntryNotFound:
+		return ErrWordDoesNotExist
+	case nil:
+		d[key] = value
+	default:
+		return err
+	}
+
+	return nil
+}
+
+func (d Dictionary) Delete(key string) error {
+	_, err := d.Search(key)
+
+	switch err {
+	case ErrEntryNotFound:
+		return ErrWordDoesNotExist
+	case nil:
+		delete(d, key)
 	default:
 		return err
 	}
