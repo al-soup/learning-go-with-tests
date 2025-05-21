@@ -1,7 +1,18 @@
 package main
 
-import "testing"
+import (
+	"bytes"
+	"testing"
+)
 
-func TestHelloWorld(t *testing.T) {
-	// t.Fatal("not implemented")
+func TestGreet(t *testing.T) {
+	buffer := bytes.Buffer{}
+	Greet(&buffer, "Alex")
+
+	got := buffer.String()
+	want := "Hello, Alex"
+
+	if got != want {
+		t.Errorf("got %q want %q", got, want)
+	}
 }
