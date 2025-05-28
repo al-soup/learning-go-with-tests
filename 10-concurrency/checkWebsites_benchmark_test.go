@@ -11,6 +11,7 @@ func stubSlowWebsiteChecker(_ string) bool {
 }
 
 // run benchmarks with `go test -bench=.`
+// detect race conditions with `go test -race`
 func BenchmarkWebsiteChecker(b *testing.B) {
 	urls := make([]string, 100)
 
