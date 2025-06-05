@@ -19,7 +19,11 @@ func Hello(name, lang string) string {
 	return greetingPrefix(lang) + name
 }
 
-// Return type is 'named return value'. If the variable it not assigned it will default to empty string
+// Return type is 'named return value'. It improves the readability of the code.
+// This is treated as a variable that is declared at the top of the function.
+// If the variable it not assigned in this case it will default to empty string
+// A return statement without arguments returns the named return values. This is known as a "naked" return.
+// Only use naked returns in short functions.
 func greetingPrefix(lang string) (prefix string) {
 	switch lang {
 	case french:
