@@ -2,22 +2,23 @@ package main
 
 import (
 	"net/http"
-	"time"
 )
 
 func Racer(a, b string) (winner string) {
-	aDuration := measureResponseTime(a)
-	bDuration := measureResponseTime(b)
-
-	if aDuration < bDuration {
+	select {
+	case <-ping(a):
 		return a
+	case <-ping(b):
+		return b
 	}
-
-	return b
 }
 
-func measureResponseTime(url string) time.Duration {
-	start := time.Now()
-	http.Get(url)
-	return time.Since(start)
+func ping(url string) (ch chan bool) {
+	// ch = make(chan struct{}) would be more memory efficient since nothing needs to actually be allocated
+	ch = make(chan bool)
+	go func() {
+		http.Get(url)
+		close(ch)
+	}()
+	return
 }
