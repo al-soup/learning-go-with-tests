@@ -1,8 +1,8 @@
 package main
 
-// vardic funcitons can take a variable number of arguments
+// vardic functions can take a variable number of arguments
 func SumAll(numberToSum ...[]int) []int {
-	// Alternative version with the problem that we might get an error if we insert to
+	// Alternative version with the problem that we might get an error if we insert
 	// to a non-existing position. With the other version we need to worry less about capacity
 
 	// numberCount := len(numberToSum)

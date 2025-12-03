@@ -29,7 +29,13 @@ var ErrInsufficientFunds = errors.New("cannot withdraw, insufficient funds")
 // original struct, allowing permanent modifications. Use value receivers for immutability
 // and small structs, and pointer receivers when you need to modify the struct or avoid
 // copying large data structures
+
+// Pointer summary:
+// *T – pointer to a value of type T.
+// &v – address‑of operator; gives a pointer to v.
+// *p – dereference a pointer p to obtain the underlying value.
 func (w *Wallet) Balance() BitCoin {
+	// Here you could also write `(*w).balance` but Go handles the dereferencing ("follow the pointer to get the actual value") automatically
 	return w.balance
 }
 

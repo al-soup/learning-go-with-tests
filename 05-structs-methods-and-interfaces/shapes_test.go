@@ -23,7 +23,7 @@ func TestArea(t *testing.T) {
 	// }
 
 	// This is a "Table driven test" - areaTests is an anonymous struct.
-	// Then we have an slice of stucts (with two fielss each)
+	// Then we have an slice of structs (with two fields each)
 	// Great fit when you wish to test various implementations of an interface, or if the data being passed in to a function has lots of different requirements that need testing.
 	areaTests := []struct {
 		name    string

@@ -5,7 +5,7 @@ package main
 // a slice is an array without a fixed length
 
 func Sum(numbers []int) (sum int) {
-	// range returns index and value. The blank represents a write-only value which can be disregradeiud
+	// range returns index and value. The blank represents a write-only value which can be disregarded
 	for _, number := range numbers {
 		sum += number
 	}

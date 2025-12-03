@@ -3,7 +3,7 @@ package main
 import "testing"
 
 // define the length of the array with [5]int or infer the fixed length with [...]int
-// []int for a slice (variable length). A function with a slice parameter will not compile with an arra y argument
+// []int for a slice (variable length). A function with a slice parameter will not compile with an array argument
 
 func TestSum(t *testing.T) {
 

@@ -17,7 +17,7 @@ type Rectangle struct {
 // Unlike regular functions which can be called independently (e.g., Area(rectangle))
 // Methods can only be called on instances of their associated type ("things")
 // Methods provide a way to add behavior to specific types
-// Syntax of a mehtod: func (receiverName ReceiverType) MethodName(args)
+// Syntax of a method: func (receiverName ReceiverType) MethodName(args)
 func (r Rectangle) Area() float64 {
 	return r.Height * r.Width
 }
