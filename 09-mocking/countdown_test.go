@@ -1,5 +1,13 @@
 package main
 
+/* Rules of thumb to help you staying with TDD
+1. Ask yourself: "Am I testing the behavior or the implementation details"
+2. A refactoring should not lead you to having to change any tests.  The outcome stays the same but the code changes in a refactoring.
+3. Private functions should not be tested because they describe implementation detail and not public behavior. Test only public behavior.
+4. Tests with more than 3 mocks is a red flag. You probably need changes in the design.
+5. Use spies with caution because you are coupling the tests to the implementation. Be sure you care about what you spy on.
+*/
+
 import (
 	"bytes"
 	"reflect"
