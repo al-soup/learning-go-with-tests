@@ -19,13 +19,13 @@ func CheckWebsites(wc WebsiteChecker, urls []string) map[string]bool {
 		// anonymous function)
 		// In this case we are passing url as a parameter rather than using a reference to it to
 		// avoid a "closure variable capture problem.": in the loop the url might still point to
-		// the last value in the loop and all goroutines would use this last url.Goroutine creation
+		// the last value in the loop and all goroutines would use this last url. Goroutine creation
 		// happens during the loop (very fast) but goroutine execution happens later when the Go
 		// scheduler runs them
 		go func(url string) {
 			// sending a `result` struct for each call to `wc` to the `resultChannel` with a "send statement".
 			resultChannel <- result{url, wc(url)}
-		}(url)
+		}(url) // IIFE
 
 	}
 
