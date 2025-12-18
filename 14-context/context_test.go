@@ -35,8 +35,13 @@ func TestServer(t *testing.T) {
 
 		request := httptest.NewRequest(http.MethodGet, "/", nil)
 
+		// `withCancel` returns derived Context values that can be canceled sooner than the parent Context
+		// Context cancellation flows downstream only (parent → children), never upstream
+		// this allows to create scoped cancellations for sub-operations without disrupting the broader context hierarchy
 		cancellingCtx, cancel := context.WithCancel(request.Context())
 		time.AfterFunc(5*time.Millisecond, cancel)
+		// creates a shallow copy of the HTTP request with a new context attached
+		// Pitfall: modifying the original request after will affect both requests!
 		request = request.WithContext(cancellingCtx)
 
 		response := &SpyResponseWriter{}
